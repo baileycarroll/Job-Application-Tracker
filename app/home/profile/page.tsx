@@ -6,6 +6,7 @@ import Form from "next/form";
 export default function Profile() {
   const user = {
     name: "Doxy",
+    email: "doxy@emailaddress.com",
   };
   return (
     <div className="flex flex-col mt-[20%] items-center justify-center">
@@ -17,6 +18,15 @@ export default function Profile() {
               type="text"
               placeholder="Bailey Carroll"
               defaultValue={user.name ? user.name : ""}
+              required
+            />
+          </Field>
+          <Field>
+            <Label>Email</Label>
+            <Input
+              type="email"
+              placeholder="doxy@someemail.com"
+              defaultValue={user.email ? user.email : ""}
               required
             />
           </Field>

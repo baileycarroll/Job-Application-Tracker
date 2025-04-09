@@ -34,13 +34,13 @@ export default function ApplicationTable() {
   const applications = [
     {
       id: 1,
-      name: "L3 Advanced Support Engineer", // Name of the Job Posting
-      company: "Coupa Software", // Company Being Applied To
-      link: "", // Link to the job posting
-      resume: "", // Resume used in the application
+      name: "Developer Tools Support Engineer 1", // Name of the Job Posting
+      company: "Nordstrom", // Company Being Applied To
+      link: "https://nordstrom.wd5.myworkdayjobs.com/en-US/nordstrom_careers/job/Developer-Tools-Support-Engineer-1--Hybrid---Seattle--WA-_R-729931", // Link to the job posting
+      resume: "Bailey Carroll - Full Resume.docx", // Resume used in the application
       coverLetter: "", // Cover Letter sent with application
-      applied: "03/10/2025", // Date Applied
-      status: "Offer Received",
+      applied: "04/09/2025", // Date Applied
+      status: "Applied",
     },
     {
       id: 2,
@@ -145,7 +145,7 @@ export default function ApplicationTable() {
             <TableRow key={app.id}>
               <TableCell className="font-medium">{app.name}</TableCell>
               <TableCell className="text-zinc-200">{app.company}</TableCell>
-              <TableCell className="text-zinc-200 flex items-center gap-2">
+              <TableCell className="text-zinc-200 flex items-center gap-2 max-w-md overflow-scroll">
                 {app.link ? (
                   <>
                     <Link href={app.link} className="underline" target="_blank">
