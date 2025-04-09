@@ -3,7 +3,7 @@ import AppStatsTable from "@/components/pageComponents/AppStatsTable";
 import { PrismaClient } from "@/generated/prisma";
 const prisma = new PrismaClient();
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 10;
 
 export default async function HomePage({
   searchParams,
@@ -22,10 +22,24 @@ export default async function HomePage({
     },
   });
   const totalPages = Math.ceil(totalApplications / PAGE_SIZE);
+  const groupedStatuses = await prisma.application.groupBy({
+    by: ["status"],
+    _count: {
+      _all: true,
+    },
+  });
+  const statusCounts = groupedStatuses.map((group) => ({
+    status: group.status,
+    count: group._count._all,
+  }));
+  console.log(groupedStatuses);
   return (
     <div className="grid grid-cols-1 *:mb-4 lg:*:mb-0 lg:grid-cols-4 xl:grid-cols-6 lg:gap-4">
       <div className="col-span-1 lg:col-start-1">
-        <AppStatsTable />
+        <AppStatsTable
+          groupedStatuses={statusCounts}
+          totalApplications={totalApplications}
+        />
       </div>
       <div className="col-span-1 lg:col-span-3 xl:col-span-5 lg:col-start-2">
         <ApplicationTable

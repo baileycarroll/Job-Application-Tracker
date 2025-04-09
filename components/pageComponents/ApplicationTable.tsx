@@ -84,16 +84,6 @@ const ApplicationTable: FC<{
               </Field>
               <div className="flex flex-row *:w-full gap-4">
                 <Field>
-                  <Label>Resume Used</Label>
-                  <Input name="resume" type="file" />
-                </Field>
-                <Field>
-                  <Label>Cover Letter Sent</Label>
-                  <Input name="coverLetter" type="file" />
-                </Field>
-              </div>
-              <div className="flex flex-row *:w-full gap-4">
-                <Field>
                   <Label>Date Applied</Label>
                   <Input name="applied" type="date" required />
                 </Field>
@@ -118,69 +108,81 @@ const ApplicationTable: FC<{
           </Form>
         </Dialog>
       </div>
-      <Table striped className="min-w-full">
-        <TableHead>
-          <TableRow>
-            <TableHeader>Name</TableHeader>
-            <TableHeader>Company</TableHeader>
-            <TableHeader>Job Listing</TableHeader>
-            <TableHeader>Resume</TableHeader>
-            <TableHeader>Cover Letter</TableHeader>
-            <TableHeader>Applied</TableHeader>
-            <TableHeader>Status</TableHeader>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {applications.map((app) => (
-            <TableRow key={app.id}>
-              <TableCell className="font-medium">{app.name}</TableCell>
-              <TableCell className="text-zinc-200">{app.company}</TableCell>
-              <TableCell className="text-zinc-200 flex items-center gap-2 max-w-md overflow-scroll">
-                {app.link ? (
-                  <>
-                    <Link href={app.link} className="underline" target="_blank">
-                      {app.link}
-                    </Link>
-                    <ArrowTopRightOnSquareIcon className="size-4" />
-                  </>
-                ) : (
-                  "N/A"
-                )}
-              </TableCell>
-              <TableCell className="text-zinc-200">
-                {new Date(app.applied).toLocaleDateString()}
-              </TableCell>
-              <TableCell className="text-zinc-200">{app.status}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Pagination>
-        {currentPage > 1 ? (
-          <PaginationPrevious href={`?page=${currentPage - 1}`} />
-        ) : (
-          <PaginationPrevious />
-        )}
-        <PaginationList>
-          {Array.from({ length: totalPages }).map((_, i) => {
-            const pageNumber = i + 1;
-            return (
-              <PaginationPage
-                key={pageNumber}
-                href={`?page=${pageNumber}`}
-                current={pageNumber === currentPage}
-              >
-                {pageNumber}
-              </PaginationPage>
-            );
-          })}
-        </PaginationList>
-        {currentPage < totalPages ? (
-          <PaginationNext href={`?page=${currentPage + 1}`} />
-        ) : (
-          <PaginationNext />
-        )}
-      </Pagination>
+      {applications.length > 0 &&
+      applications !== null &&
+      applications !== undefined ? (
+        <>
+          <Table striped className="min-w-full">
+            <TableHead>
+              <TableRow>
+                <TableHeader>Name</TableHeader>
+                <TableHeader>Company</TableHeader>
+                <TableHeader>Job Listing</TableHeader>
+                <TableHeader>Applied</TableHeader>
+                <TableHeader>Status</TableHeader>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {applications.map((app) => (
+                <TableRow key={app.id}>
+                  <TableCell className="font-medium">{app.name}</TableCell>
+                  <TableCell className="text-zinc-200">{app.company}</TableCell>
+                  <TableCell className="text-zinc-200 flex items-center gap-2 max-w-md overflow-scroll">
+                    {app.link ? (
+                      <>
+                        <Link
+                          href={app.link}
+                          className="underline"
+                          target="_blank"
+                        >
+                          {app.link}
+                        </Link>
+                        <ArrowTopRightOnSquareIcon className="size-4" />
+                      </>
+                    ) : (
+                      "N/A"
+                    )}
+                  </TableCell>
+                  <TableCell className="text-zinc-200">
+                    {new Date(app.applied).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-zinc-200">{app.status}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Pagination>
+            {currentPage > 1 ? (
+              <PaginationPrevious href={`?page=${currentPage - 1}`} />
+            ) : (
+              <PaginationPrevious />
+            )}
+            <PaginationList>
+              {Array.from({ length: totalPages }).map((_, i) => {
+                const pageNumber = i + 1;
+                return (
+                  <PaginationPage
+                    key={pageNumber}
+                    href={`?page=${pageNumber}`}
+                    current={pageNumber === currentPage}
+                  >
+                    {pageNumber}
+                  </PaginationPage>
+                );
+              })}
+            </PaginationList>
+            {currentPage < totalPages ? (
+              <PaginationNext href={`?page=${currentPage + 1}`} />
+            ) : (
+              <PaginationNext />
+            )}
+          </Pagination>
+        </>
+      ) : (
+        <div className="flex justify-center text-2xl font-bold">
+          No Applications Yet!
+        </div>
+      )}
     </div>
   );
 };
