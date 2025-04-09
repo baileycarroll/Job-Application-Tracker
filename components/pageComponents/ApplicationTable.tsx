@@ -29,30 +29,20 @@ import {
 } from "@/components/table";
 import Link from "next/link";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/16/solid";
-import { useState } from "react";
-export default function ApplicationTable() {
-  const applications = [
-    {
-      id: 1,
-      name: "Developer Tools Support Engineer 1", // Name of the Job Posting
-      company: "Nordstrom", // Company Being Applied To
-      link: "https://nordstrom.wd5.myworkdayjobs.com/en-US/nordstrom_careers/job/Developer-Tools-Support-Engineer-1--Hybrid---Seattle--WA-_R-729931", // Link to the job posting
-      resume: "Bailey Carroll - Full Resume.docx", // Resume used in the application
-      coverLetter: "", // Cover Letter sent with application
-      applied: "04/09/2025", // Date Applied
-      status: "Applied",
-    },
-    {
-      id: 2,
-      name: "Senior Technical Support Engineer", // Name of the Job Posting
-      company: "Carbon Robotics", // Company Being Applied To
-      link: "https://carbonrobotics.com", // Link to the job posting
-      resume: "", // Resume used in the application
-      coverLetter: "", // Cover Letter sent with application
-      applied: "10/10/2024", // Date Applied
-      status: "Interviewing",
-    },
-  ];
+import { useState, FC } from "react";
+interface AppProps {
+  id: number;
+  name: string;
+  company: string;
+  link: string;
+  applied: Date;
+  status: string;
+}
+const ApplicationTable: FC<{
+  applications: AppProps[];
+  currentPage: number;
+  totalPages: number;
+}> = ({ applications, currentPage, totalPages }) => {
   let [addAppOpen, setAddAppOpen] = useState(false);
   return (
     <div className="flex flex-col *:mb-4 outline outline-zinc-400 shadow-md shadow-zinc-500 rounded p-3">
@@ -158,32 +148,40 @@ export default function ApplicationTable() {
                 )}
               </TableCell>
               <TableCell className="text-zinc-200">
-                {app.resume ? app.resume : "N/A"}
+                {new Date(app.applied).toLocaleDateString()}
               </TableCell>
-              <TableCell className="text-zinc-200">
-                {app.coverLetter ? app.coverLetter : "N/A"}
-              </TableCell>
-              <TableCell className="text-zinc-200">{app.applied}</TableCell>
               <TableCell className="text-zinc-200">{app.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Pagination>
-        <PaginationPrevious href="?page=2" />
+        {currentPage > 1 ? (
+          <PaginationPrevious href={`?page=${currentPage - 1}`} />
+        ) : (
+          <PaginationPrevious />
+        )}
         <PaginationList>
-          <PaginationPage href="?page=1">1</PaginationPage>
-          <PaginationPage href="?page=2">2</PaginationPage>
-          <PaginationPage href="?page=3" current>
-            3
-          </PaginationPage>
-          <PaginationPage href="?page=4">4</PaginationPage>
-          <PaginationGap />
-          <PaginationPage href="?page=65">65</PaginationPage>
-          <PaginationPage href="?page=66">66</PaginationPage>
+          {Array.from({ length: totalPages }).map((_, i) => {
+            const pageNumber = i + 1;
+            return (
+              <PaginationPage
+                key={pageNumber}
+                href={`?page=${pageNumber}`}
+                current={pageNumber === currentPage}
+              >
+                {pageNumber}
+              </PaginationPage>
+            );
+          })}
         </PaginationList>
-        <PaginationNext href="?page=4" />
+        {currentPage < totalPages ? (
+          <PaginationNext href={`?page=${currentPage + 1}`} />
+        ) : (
+          <PaginationNext />
+        )}
       </Pagination>
     </div>
   );
-}
+};
+export default ApplicationTable;
