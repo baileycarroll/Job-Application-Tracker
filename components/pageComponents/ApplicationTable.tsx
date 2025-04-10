@@ -2,16 +2,6 @@
 
 import { Button } from "@/components/button";
 import {
-  Dialog,
-  DialogActions,
-  DialogBody,
-  DialogDescription,
-  DialogTitle,
-} from "@/components/dialog";
-import { Field, Label } from "@/components/fieldset";
-import Form from "next/form";
-import { Input } from "@/components/input";
-import {
   Pagination,
   PaginationGap,
   PaginationList,
@@ -30,6 +20,7 @@ import {
 import Link from "next/link";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/16/solid";
 import { useState, FC } from "react";
+import AddApplicationDialog from "./AddApplicationDialog";
 interface AppProps {
   id: number;
   name: string;
@@ -50,63 +41,10 @@ const ApplicationTable: FC<{
         <Button type="button" onClick={() => setAddAppOpen(true)}>
           Add Application
         </Button>
-        <Dialog open={addAppOpen} onClose={setAddAppOpen}>
-          <Form action="/applications">
-            <DialogTitle>Add Job Application</DialogTitle>
-            <DialogBody className="*:mb-2">
-              <div className="flex flex-row *:w-full gap-4">
-                <Field>
-                  <Label>Name</Label>
-                  <Input
-                    name="name"
-                    type="text"
-                    placeholder="Position Name"
-                    required
-                  />
-                </Field>
-                <Field>
-                  <Label>Company</Label>
-                  <Input
-                    name="company"
-                    type="text"
-                    placeholder="Company Name"
-                    required
-                  />
-                </Field>
-              </div>
-              <Field>
-                <Label>Job Listing</Label>
-                <Input
-                  name="link"
-                  type="url"
-                  placeholder="https://somecompany.com/careers/5gu76786"
-                />
-              </Field>
-              <div className="flex flex-row *:w-full gap-4">
-                <Field>
-                  <Label>Date Applied</Label>
-                  <Input name="applied" type="date" required />
-                </Field>
-                <Field>
-                  <Label>Status</Label>
-                  <Input
-                    name="status"
-                    placeholder="Application Status"
-                    required
-                  />
-                </Field>
-              </div>
-            </DialogBody>
-            <DialogActions>
-              <Button plain onClick={() => setAddAppOpen(false)}>
-                Cancel
-              </Button>
-              <Button type="submit" onClick={() => setAddAppOpen(false)}>
-                Add Job
-              </Button>
-            </DialogActions>
-          </Form>
-        </Dialog>
+        <AddApplicationDialog
+          addAppOpen={addAppOpen}
+          setAddAppOpen={setAddAppOpen}
+        />
       </div>
       {applications.length > 0 &&
       applications !== null &&

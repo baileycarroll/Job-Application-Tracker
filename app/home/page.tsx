@@ -32,7 +32,6 @@ export default async function HomePage({
     status: group.status,
     count: group._count._all,
   }));
-  console.log(groupedStatuses);
   return (
     <div className="grid grid-cols-1 *:mb-4 lg:*:mb-0 lg:grid-cols-4 xl:grid-cols-6 lg:gap-4">
       <div className="col-span-1 lg:col-start-1">
