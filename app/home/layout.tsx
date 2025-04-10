@@ -34,21 +34,21 @@ import {
   UserIcon,
 } from "@heroicons/react/16/solid";
 import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-
+import { PrismaClient } from "@/generated/prisma";
 const navItems = [
   { label: "Home", url: "/home" },
   { label: "Upload", url: "/home/upload" },
   { label: "Profile", url: "/home/profile" },
 ];
 
-export default function HomeLayout({
+const prisma = new PrismaClient();
+
+export default async function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const profileProps = {
-    username: "Doxy",
-  };
+  const profileProps = await prisma.user.findFirst();
 
   return (
     <StackedLayout
@@ -65,7 +65,7 @@ export default function HomeLayout({
           </NavbarSection>
           <NavbarSpacer />
           <NavbarSection>
-            {profileProps.username ? profileProps.username : "Update Profile"}
+            {profileProps?.name ?? "Update Profile"}
           </NavbarSection>
         </Navbar>
       }

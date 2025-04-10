@@ -1,11 +1,10 @@
 "use server";
-import { PrismaClient, Prisma } from "@/generated/prisma";
+import { PrismaClient } from "@/generated/prisma";
 import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
 
 export async function createApplication(formData: FormData) {
   const req = formData;
-  console.log(req);
   try {
     if (req !== undefined && req !== null) {
       try {
