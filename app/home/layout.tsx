@@ -37,7 +37,6 @@ import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { PrismaClient } from "@/generated/prisma";
 const navItems = [
   { label: "Home", url: "/home" },
-  { label: "Upload", url: "/home/upload" },
   { label: "Profile", url: "/home/profile" },
 ];
 
