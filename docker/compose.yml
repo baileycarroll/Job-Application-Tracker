@@ -5,7 +5,7 @@ services:
     container_name: postgres_17_db
     restart: always
     env_file:
-      - .env
+      - ../.env
     volumes:
       - ./data:/var/lib/postgresql/data:rw
       - ./init:/docker-entrypoint-initdb.d:ro

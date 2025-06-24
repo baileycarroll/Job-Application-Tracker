@@ -1,36 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Application Tracker (JAT)
 
-## Getting Started
+This is a small application I've developed in NextJS to track all of the job applications that I have submitted with their relevant details. This was more of a small tool for me to be able to track who, what, when, where, and how I applied to which positions, as well as what resume's and cover letters were used in that process.
 
-First, run the development server:
+## Running the Application
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Note:** You will need docker installed in order to use this application.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Copy `.env.example` to `.env` and put the desired values for the postgres database.
+2. Run `npm install` to install all necessary dependencies.
+3. Run `npx prisma generate` to generate the prisma client.
+4. Run `npx prisma migrate dev` to run the necessary migrations (without seeding).
+5. Run `docker compose -f ./docker/compose.yml up -d` to start the docker container.
+6. Run `npm run dev` to start the application. You can access it via [http://localhost:3000](http://localhost:3000)
