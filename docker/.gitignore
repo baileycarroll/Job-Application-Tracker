@@ -1,3 +1,4 @@
 .env
 data/
 logs/postgres.log
+!.env.example
