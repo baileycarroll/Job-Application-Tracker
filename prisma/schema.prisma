@@ -9,9 +9,10 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String
+  password String
 }
 
 model Application {
@@ -21,4 +22,10 @@ model Application {
   link    String
   applied DateTime
   status  String
+}
+
+model SetupKeys {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value String
 }

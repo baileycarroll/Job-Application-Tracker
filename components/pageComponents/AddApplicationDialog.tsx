@@ -16,7 +16,11 @@ const AddApplicationDialog: FC<{
   setAddAppOpen: (value: boolean) => void;
 }> = ({ addAppOpen, setAddAppOpen }) => {
   return (
-    <Dialog open={addAppOpen} onClose={setAddAppOpen}>
+    <Dialog
+      open={addAppOpen}
+      onClose={setAddAppOpen}
+      className="!bg-slate-900 !ring-cyan-500"
+    >
       <form action={createApplication}>
         <DialogTitle>Add Job Application</DialogTitle>
         <DialogBody className="*:mb-2">
@@ -63,7 +67,11 @@ const AddApplicationDialog: FC<{
           <Button plain onClick={() => setAddAppOpen(false)}>
             Cancel
           </Button>
-          <Button type="submit" onClick={() => setAddAppOpen(false)}>
+          <Button
+            type="submit"
+            onClick={() => setAddAppOpen(false)}
+            className="!bg-cyan-600"
+          >
             Add Job
           </Button>
         </DialogActions>

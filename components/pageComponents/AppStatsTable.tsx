@@ -18,7 +18,7 @@ const AppStatsTable: FC<{
   totalApplications: number;
 }> = ({ groupedStatuses, totalApplications }) => {
   return (
-    <div className="outline outline-zinc-400 shadow-md shadow-zinc-500 rounded p-3">
+    <div className="outline outline-cyan-400 shadow-md shadow-cyan-500 rounded p-3">
       <h2 className="mb-4 flex justify-center font-bold text-lg">
         <span>Application Stats</span>
       </h2>

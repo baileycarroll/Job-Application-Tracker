@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/table";
 import Link from "next/link";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/16/solid";
+import { ArrowTopRightOnSquareIcon, PlusIcon } from "@heroicons/react/16/solid";
 import { useState, FC } from "react";
 import AddApplicationDialog from "./AddApplicationDialog";
 interface AppProps {
@@ -36,10 +36,14 @@ const ApplicationTable: FC<{
 }> = ({ applications, currentPage, totalPages }) => {
   let [addAppOpen, setAddAppOpen] = useState(false);
   return (
-    <div className="flex flex-col *:mb-4 outline outline-zinc-400 shadow-md shadow-zinc-500 rounded p-3">
+    <div className="flex flex-col *:mb-4 outline outline-cyan-400 shadow-md shadow-cyan-500 rounded p-3">
       <div className="ml-auto">
-        <Button type="button" onClick={() => setAddAppOpen(true)}>
-          Add Application
+        <Button
+          type="button"
+          onClick={() => setAddAppOpen(true)}
+          className="!bg-cyan-600"
+        >
+          <PlusIcon className="!text-white" />
         </Button>
         <AddApplicationDialog
           addAppOpen={addAppOpen}

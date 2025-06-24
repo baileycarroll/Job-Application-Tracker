@@ -1,12 +1,3 @@
-import { Avatar } from "@/components/avatar";
-import {
-  Dropdown,
-  DropdownButton,
-  DropdownDivider,
-  DropdownItem,
-  DropdownLabel,
-  DropdownMenu,
-} from "@/components/dropdown";
 import {
   Navbar,
   NavbarDivider,
@@ -18,22 +9,10 @@ import {
 import {
   Sidebar,
   SidebarBody,
-  SidebarHeader,
   SidebarItem,
-  SidebarLabel,
   SidebarSection,
 } from "@/components/sidebar";
 import { StackedLayout } from "@/components/stacked-layout";
-import {
-  ArrowRightStartOnRectangleIcon,
-  ChevronDownIcon,
-  Cog8ToothIcon,
-  LightBulbIcon,
-  PlusIcon,
-  ShieldCheckIcon,
-  UserIcon,
-} from "@heroicons/react/16/solid";
-import { InboxIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { PrismaClient } from "@/generated/prisma";
 const navItems = [
   { label: "Home", url: "/home" },
